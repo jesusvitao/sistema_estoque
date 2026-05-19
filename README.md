@@ -70,8 +70,8 @@ DB_PASSWORD = "senha_neon"
 Configure as seguintes variáveis antes de iniciar o sistema:
 
 ```bash
-SECRET_KEY=uma_chave_secreta_longa_e_aleatoria
-GOOGLE_CLIENT_ID=seu_client_id.apps.googleusercontent.com
+SECRET_KEY=chave_secreta_
+GOOGLE_CLIENT_ID=seu_client_id
 ```
 
 ### 6. Configurar Login com Google (OAuth 2.0)
