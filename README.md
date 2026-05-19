@@ -53,26 +53,27 @@ cd sistema_estoque
 pip install -r requirements.txt
 ```
 
-### 4. Configurar Conexão com o Banco de Dados
+### 4. Configurar Variáveis de Ambiente
 
-Edite o arquivo `conexao.py` e configure as credenciais do seu banco de dados:
+Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
-```python
-DB_HOST = "host_neon"
-DB_PORT = 5432
-DB_NAME = "estoque_ti"
-DB_USER = "usuario_neon"
-DB_PASSWORD = "senha_neon"
-```
-
-### 5. Configurar Variáveis de Ambiente
-
-Configure as seguintes variáveis antes de iniciar o sistema:
-
-```bash
-SECRET_KEY=chave_secreta_
+DB_HOST=seu_host_neon
+DB_PORT=5432
+DB_NAME=estoque_ti
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+SECRET_KEY=chave_secreta
 GOOGLE_CLIENT_ID=seu_client_id
-```
+
+O arquivo `.env` nunca deve ser enviado ao Git. Ele já está listado no `.gitignore` do projeto.
+
+### 5. Variáveis de Ambiente no Render
+
+No painel do Render, vá em **Environment** e clique em **Add from .env**. Cole o conteúdo do seu arquivo `.env` e o Render preencherá todas as variáveis automaticamente.
+
+O Start Command deve ser configurado como:
+
+gunicorn main:app --bind 0.0.0.0:$PORT
 
 ### 6. Configurar Login com Google (OAuth 2.0)
 
@@ -129,6 +130,7 @@ O sistema possui dois perfis de acesso:
 
 ## Segurança
 
+- **Credenciais:** Nunca commite senhas ou chaves no Git. Use variáveis de ambiente via arquivo `.env` localmente e pela seção Environment no Render em produção.
 - **Senhas:** Armazenadas em texto simples (para desenvolvimento). Em produção, use hash (bcrypt, argon2)
 - **Chave Secreta:** Defina `SECRET_KEY` como variável de ambiente, nunca hardcode no código
 - **Google OAuth:** Defina `GOOGLE_CLIENT_ID` como variável de ambiente
